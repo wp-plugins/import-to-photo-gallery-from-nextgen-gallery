@@ -1,4 +1,4 @@
-=== Import to Photo Gallery from NextGen Gallery ===
+=== NextGen Gallery Import to Photo Gallery ===
 Contributors: webdorado
 Donate link: https://web-dorado.com/products/wordpress-photo-gallery-plugin.html
 Tags: photo gallery, nextgen gallery, gallery, import
@@ -8,12 +8,14 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Import to Photo Gallery from NextGen Gallery is an easy setup addon for importing photos and related data from NextGen gallery to Photo Gallery. 
+NextGen Gallery Import to Photo Gallery  is an easy setup addon for importing photos and related data from NextGen Gallery to Photo Gallery.  
 
 == Description ==
 
-
+NextGen Gallery Import to Photo Gallery  is an easy setup addon for importing photos and related data from NextGen Gallery to Photo Gallery. 
 The add-on allows importing not only the galleries and albums but also tags and comments.The imported data gets stored in Photo Gallery format, so the galleries and albums can be further modified and changed based on Photo Gallery options.
+Both NextGen and Photo Gallery plugins should be installed and activated within the site in order to use the add-on.
+To use the add-on you should install it as a standard plugin. Go to Plugins>Add New>Upload. Select the add-on and press Upload. Then activate the add-on.
 
 
 == Installation ==
