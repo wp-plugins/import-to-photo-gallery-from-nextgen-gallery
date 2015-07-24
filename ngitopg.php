@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Import to Photo Gallery from NextGen Gallery
+ * Plugin Name: NextGen Gallery Import to Photo Gallery
  * Plugin URI: http://web-dorado.com/products/wordpress-photo-gallery-plugin.html
  * Description: This addon integrates NextGen with Photo Gallery allowing to import images and related data from NextGen to use with Photo Gallery.
  * Version: 1.0.0
