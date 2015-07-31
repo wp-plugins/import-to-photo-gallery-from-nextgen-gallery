@@ -362,7 +362,7 @@ class PGIControllerImport_pgi {
       }
 	  }
     if ($save !== FALSE) {
-      echo $model->message(__('Datas successfully imported', 'pgi'), 'updated');
+      echo $model->message(__('The data is successfully imported.', 'pgi'), 'updated');
 	    $view->display();
     }
   }
