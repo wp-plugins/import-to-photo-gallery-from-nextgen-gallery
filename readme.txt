@@ -12,17 +12,15 @@ NextGen Gallery Import to Photo Gallery  is an easy setup addon for importing ph
 
 == Description ==
 
-NextGen Gallery Import to Photo Gallery  is an easy setup addon for importing photos and related data from NextGen Gallery to Photo Gallery. 
-The add-on allows importing not only the galleries and albums but also tags and comments.The imported data gets stored in Photo Gallery format, so the galleries and albums can be further modified and changed based on Photo Gallery options.
-Both NextGen and Photo Gallery plugins should be installed and activated within the site in order to use the add-on.
-To use the add-on you should install it as a standard plugin. Go to Plugins>Add New>Upload. Select the add-on and press Upload. Then activate the add-on.
+NextGen Import to Photo Gallery is an easy setup addon for importing photos and related data from NextGen plugin to Photo Gallery.
+NextGen Import to PG add-on allows importing not only NextGen galleries and albums but also related data. This include NextGen photo tags and comments. This means that you can import individual or specific album from NextGen or choose to import all NextGen albums and galleries.
+The imported data gets switched from NextGen logic to Photo Gallery, so the galleries and albums can be further modified and changed based on Photo Gallery options.
 
 
 == Installation ==
-
 Both NextGen and Photo Gallery plugins should be installed and activated within the site in order to use the add-on.
+To use the NextGen Import to PG add-on you should install it as a standard plugin. Go to Plugins>Add New>Upload. Select the add-on and press Upload. Then activate the add-on.
 
-To use the add-on you should install it as a standard plugin. Go to Plugins>Add New>Upload. Select the add-on and press Upload. Then activate the add-on.
 
 
 == Changelog ==
@@ -34,9 +32,12 @@ Initial version
 
 Settings
 
-Select the data you plan to import. Start with galleries and albums.  
-*   Galleries. Select the gallery(ies) to import from NextGen. Use the checkbox to mark the galleries.   
-*   Albums. Select the album(s) to import from NexGen. Use the checkbox to mark the albums.   
-*   Import Comments. Choose whether to import the comments related to the imported galleries/albums or not.   
-*   Import Tags. Choose whether to import the tags from NextGen or not. Tags will be used with the Photo Gallery Tag Cloud widgets.   
- 
+Select the NextGen data you plan to import. The import process should start with NextGen galleries and albums. Only after that you should proceed with import of related data. 
+
+Galleries. Select the gallery(ies) to import from NextGen. Use the checkbox to mark the galleries.  
+Albums. Select the album(s) to import from NexGen. Use the checkbox to mark the albums.   
+Import Comments. Choose whether to import the comments related to the imported NextGen galleries/albums or not. Note that you should select the NextGen gallery/album and only after select to import the comments.   
+Import Tags. Choose whether to import the tags from NextGen or not. Tags will be used with the Photo Gallery Tag Cloud widgets. Note that you should select the NextGen gallery/album and only after select to import the tags.    
+  
+When the NextGen data is imported, a success message will be displayed and the NextGen albums/galleries and related data will be added to the Photo Gallery plugin.
+  
