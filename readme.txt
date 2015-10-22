@@ -4,7 +4,7 @@ Donate link: https://web-dorado.com/products/wordpress-photo-gallery-plugin.html
 Tags: photo gallery, nextgen gallery, gallery, import
 Requires at least: 3.4
 Tested up to: 4.3
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,7 +26,11 @@ To use the NextGen Gallery Import to PG add-on you should install it as a standa
 == Changelog ==
 
 = 1.0.0 =
-Initial version
+Initial version   
+
+= 1.0.1 =
+Fixed: Tags with duplicate names.
+
 
 ==Step by step guide== 
 

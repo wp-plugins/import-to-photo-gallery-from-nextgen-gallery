@@ -79,6 +79,7 @@ class PGIControllerImport_pgi {
 	 $images_relation = array();
 	 $galleries_selected = array_unique($galleries_selected);
 	 $galleries_relation = array();
+   $import_images_pid = array();
 	 $order =((int) $wpdb->get_var('SELECT MAX(`order`) FROM ' . $wpdb->prefix . 'bwg_gallery'));
 	 foreach ($galleries_selected as $gallery_id) {
 	   $import_gallery = $model->get_results('ngg_gallery', 'gid', $gallery_id);
@@ -119,6 +120,7 @@ class PGIControllerImport_pgi {
         $galleries_relation[$gallery->gid] = $id;
         $import_images = $model->get_results('ngg_pictures','galleryid',$gallery->gid);
         foreach ($import_images as $import_image) {
+          $import_images_pid[]= $import_image->pid;
           if (file_exists($ng_upload_dir . '/' . $import_image->filename)) {
             copy($ng_upload_dir.'/'.$import_image->filename, $bwg_path.'/import/'.$import_image->filename);
           }
@@ -176,46 +178,46 @@ class PGIControllerImport_pgi {
           ));
           $max_image_id = $wpdb->get_var('SELECT MAX(id) FROM ' . $wpdb->prefix . 'bwg_image');
           $images_relation[$import_image->pid] = $max_image_id;
-          if (isset($_POST['import_tags']) && esc_html($_POST['import_tags']) == '1') {
-            $terms = $wpdb->get_results('SELECT t2.term_id, t2.description, t2.`parent`, t2.`count`, t3.name, t3.slug, t3.term_group FROM ' . $wpdb->prefix . 'term_relationships AS t1 JOIN ' . $wpdb->prefix . 'term_taxonomy AS t2  ON  t1.term_taxonomy_id = t2.term_taxonomy_id LEFT JOIN ' . $wpdb->prefix . 'terms AS t3 ON t3.term_id = t2.term_id
-			WHERE t1.object_id = "'.$import_image->pid.'" AND t2.taxonomy="ngg_tag"');
-            foreach ($terms as $term) {
-		      $save_terms = $wpdb->insert($wpdb->prefix . 'terms', array(
-               'name' => $term->name,
-               'slug' => $term->slug,
-               'term_group' => $term->term_group,
-               ), array(
-                '%s',
-                '%s',
-                '%d',
-                ));
-					
-			  $max_term_id = $wpdb->get_var('SELECT MAX(term_id) FROM ' . $wpdb->prefix . 'terms');
-              $save_image_tag = $wpdb->insert($wpdb->prefix . 'bwg_image_tag', array(
-               'tag_id' => $max_term_id,
-               'image_id' => $max_image_id,
-               'gallery_id' => $id,
-               ), array(
-                '%d',
-                '%d',
-                '%d',
-                ));
-              $new_term_id = $wpdb->insert($wpdb->prefix . 'term_taxonomy', array(
-              'term_id' => $max_term_id,
-              'taxonomy' => 'bwg_tag',
-              'description' => $term->description,
-              'parent' => $term->parent,
-              'count' => $term->count,
-               ), array(
-               '%d',
-               '%s',
-               '%s',
-               '%d',
-               '%d',
-              ));
-            }
-          }
         }
+      }
+    }
+    if (isset($_POST['import_tags']) && esc_html($_POST['import_tags']) == '1') {
+      $import_images_pid = implode(',',$import_images_pid);
+      $terms = $wpdb->get_results('SELECT t2.term_id, t2.description, t2.`parent`, t2.`count`, t3.name, t3.slug, t3.term_group FROM ( SELECT GROUP_CONCAT( object_id SEPARATOR ",") AS object_ids, term_taxonomy_id  FROM ' . $wpdb->prefix . 'term_relationships GROUP BY term_taxonomy_id) AS t1 JOIN ' . $wpdb->prefix . 'term_taxonomy AS t2  ON  t1.term_taxonomy_id = t2.term_taxonomy_id LEFT JOIN ' . $wpdb->prefix . 'terms AS t3 ON t3.term_id = t2.term_id WHERE t1.object_ids IN (' . $import_images_pid . ') AND t2.taxonomy="ngg_tag"');
+      foreach ($terms as $term) {
+        $save_terms = $wpdb->insert($wpdb->prefix . 'terms', array(
+         'name' => $term->name,
+         'slug' => $term->slug,
+         'term_group' => $term->term_group,
+         ), array(
+          '%s',
+          '%s',
+          '%d',
+          ));
+    
+        $max_term_id = $wpdb->get_var('SELECT MAX(term_id) FROM ' . $wpdb->prefix . 'terms');
+        $save_image_tag = $wpdb->insert($wpdb->prefix . 'bwg_image_tag', array(
+         'tag_id' => $max_term_id,
+         'image_id' => $max_image_id,
+         'gallery_id' => $id,
+         ), array(
+          '%d',
+          '%d',
+          '%d',
+          ));
+        $new_term_id = $wpdb->insert($wpdb->prefix . 'term_taxonomy', array(
+        'term_id' => $max_term_id,
+        'taxonomy' => 'bwg_tag',
+        'description' => $term->description,
+        'parent' => $term->parent,
+        'count' => $term->count,
+         ), array(
+         '%d',
+         '%s',
+         '%s',
+         '%d',
+         '%d',
+        ));
       }
     }
     $author = get_current_user_id();
@@ -312,7 +314,6 @@ class PGIControllerImport_pgi {
 	    }
 	  }
     if ($images_relation != array()) {
-      //? poster@ pti stugvi esc_html u isset
       if (isset($_POST['import_comments']) && esc_html($_POST['import_comments']) == '1') {
         $comments = $wpdb->get_results("SELECT t1.*, t2.post_name  FROM " . $wpdb->prefix . "comments AS t1 LEFT JOIN " . $wpdb->prefix . "posts AS t2 ON t1.comment_post_ID = t2.ID WHERE t2.comment_count>0 AND t2.post_type='photocrati-comments' ");
         foreach($comments as $comment) {
