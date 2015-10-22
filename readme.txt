@@ -26,10 +26,10 @@ To use the NextGen Gallery Import to PG add-on you should install it as a standa
 == Changelog ==
 
 = 1.0.0 =
-Initial version   
+* Initial version.   
 
 = 1.0.1 =
-Fixed: Tags with duplicate names.
+* Fixed: Tags with duplicate names.    
 
 
 ==Step by step guide== 
